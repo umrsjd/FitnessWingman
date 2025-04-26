@@ -1,0 +1,71 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-primary text-white font-sans antialiased;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-accent text-white rounded-lg transition-all hover:bg-opacity-90 transform hover:scale-105 font-medium;
+  }
+  
+  .input-field {
+    @apply w-full px-4 py-3 bg-secondary rounded-lg border border-accent focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent placeholder:text-gray-500;
+  }
+
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .feature-card {
+    @apply bg-secondary p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20;
+  }
+  
+  .animated-gradient {
+    @apply bg-gradient-to-r from-accent-light to-accent bg-[length:200%_100%] animate-pulse-slow;
+  }
+}
+
+@layer utilities {
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-purple via-accent to-neon-cyan;
+  }
+  
+  .hover-lift {
+    @apply transition-transform duration-300 hover:-translate-y-1;
+  }
+  
+  .shadow-glow {
+    @apply shadow-neon;
+  }
+
+
+
+  .neon-glow {
+    @apply shadow-neon-strong;
+  }
+  
+  .bg-gradient-neon {
+    @apply bg-gradient-to-r from-neon-purple via-accent to-neon-cyan;
+  }
+}
+
+@keyframes gradient-x {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
