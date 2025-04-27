@@ -1,71 +1,53 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Bungee&family=Luckiest+Guy&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
-  body {
-    @apply bg-primary text-white font-sans antialiased;
-  }
-  
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-bold tracking-tight;
-  }
+:root {
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: #000000;
+  color: #ffffff;
 }
 
 @layer components {
+  .section-container {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8;
+  }
+  
+  .glassmorphism-card {
+    @apply bg-secondary/40 backdrop-blur-md rounded-xl p-6 border border-accent/20 shadow-lg transform transition-all duration-300 hover:shadow-neon;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+  }
+  
+
+  .shadow-glow {
+    box-shadow: 0 0 15px rgba(100, 108, 255, 0.6);
+  }
+  
   .btn-primary {
-    @apply px-6 py-3 bg-accent text-white rounded-lg transition-all hover:bg-opacity-90 transform hover:scale-105 font-medium;
+    @apply bg-accent hover:bg-accent-light text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-glow;
   }
   
   .input-field {
-    @apply w-full px-4 py-3 bg-secondary rounded-lg border border-accent focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent placeholder:text-gray-500;
-  }
-
-  .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
-  }
-  
-  .feature-card {
-    @apply bg-secondary p-6 rounded-lg transition-all duration-300 hover:shadow-lg hover:shadow-accent/20;
-  }
-  
-  .animated-gradient {
-    @apply bg-gradient-to-r from-accent-light to-accent bg-[length:200%_100%] animate-pulse-slow;
+    @apply bg-secondary/50 border border-accent/30 rounded-lg py-3 px-4 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent;
   }
 }
 
-@layer utilities {
-  .text-gradient {
-    @apply bg-clip-text text-transparent bg-gradient-to-r from-neon-purple via-accent to-neon-cyan;
-  }
-  
-  .hover-lift {
-    @apply transition-transform duration-300 hover:-translate-y-1;
-  }
-  
-  .shadow-glow {
-    @apply shadow-neon;
-  }
-
-
-
-  .neon-glow {
-    @apply shadow-neon-strong;
-  }
-  
-  .bg-gradient-neon {
-    @apply bg-gradient-to-r from-neon-purple via-accent to-neon-cyan;
-  }
+/* Tilted card effect */
+.glassmorphism-card {
+  transition: transform 0.3s ease;
 }
 
-@keyframes gradient-x {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
+.glassmorphism-card:hover {
+  transform: perspective(1000px) rotateX(-5deg) rotateY(5deg);
+  box-shadow: 0 0 20px rgba(100, 108, 255, 0.5);
 }

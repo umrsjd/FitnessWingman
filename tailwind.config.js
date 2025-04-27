@@ -7,14 +7,20 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': '#0f172a',
-        'secondary': '#1e293b',
+        'primary': '#000000', // Black background
+        'secondary': '#1a1a1a', // Dark gray for secondary elements
         'accent': '#646cff',
         'accent-light': '#818cf8',
         'success': '#4ade80',
         'neon-purple': '#a78bfa',
         'neon-blue': '#60a5fa',
         'neon-cyan': '#67e8f9',
+      },
+      fontFamily: {
+        sans: ['Poppins', 'sans-serif'], // Default sans-serif
+        orbitron: ['Orbitron', 'sans-serif'],
+        bungee: ['Bungee', 'cursive'],
+        luckiest: ['Luckiest Guy', 'cursive'],
       },
       animation: {
         'fade-in': 'fadeIn 0.5s ease-in',
