@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Gruppo&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Orbitron:wght@400;500;600;700;800&family=Bungee&family=Luckiest+Guy&display=swap');
 
 @tailwind base;
@@ -20,6 +21,11 @@ body {
 @layer components {
   .section-container {
     @apply container mx-auto px-4 sm:px-6 lg:px-8;
+    .section-container {
+      text-align: left; /* Align text to the left */
+      margin-left: 0; /* Remove any left margin */
+      padding-left: 0; /* Remove any left padding */
+    }
   }
   
   .glassmorphism-card {
@@ -34,7 +40,7 @@ body {
   }
   
   .btn-primary {
-    @apply bg-accent hover:bg-accent-light text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-glow;
+    @apply bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-glow;
   }
   
   .input-field {

@@ -356,73 +356,52 @@ const animationData = {
   "markers":[]
 };
 
-const LottieRunningMan = ({ scrollSpeed = 1 }) => {
+const LottieRunningMan = () => {
   const containerRef = useRef(null);
   const animationRef = useRef(null);
-  const isInView = useInView(containerRef, { once: false, amount: 0.3, margin: "-100px 0px" });
 
   useEffect(() => {
     if (!containerRef.current) return;
 
-    animationRef.current = lottie.loadAnimation({
-      container: containerRef.current,
-      renderer: 'svg',
-      loop: true,
-      autoplay: false,
-      animationData: animationData
-    });
+    fetch('https://assets4.lottiefiles.com/animation/54919c33-a6d4-4908-919f-7f824c262d69/data.json')
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      .then(animationData => {
+        if (animationRef.current) {
+          animationRef.current.destroy();
+        }
 
-    const handleScroll = () => {
-      if (!animationRef.current) return;
-      
-      // Calculate animation progress based on scroll position
-      const scrollPosition = window.scrollY;
-      const scrollHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollProgress = scrollPosition / scrollHeight;
-      
-      // Get element position for more precise control
-      const rect = containerRef.current.getBoundingClientRect();
-      const elementVisibility = 1 - (rect.top / window.innerHeight);
-      const visibilityFactor = Math.max(0, Math.min(1, elementVisibility));
-      
-      // Control animation speed based on scroll and visibility
-      const newSpeed = 1 + (scrollProgress * scrollSpeed * visibilityFactor * 2);
-      animationRef.current.setSpeed(newSpeed);
-      
-      // Ensure animation is playing
-      if (animationRef.current.isPaused) {
-        animationRef.current.play();
-      }
-    };
+        animationRef.current = lottie.loadAnimation({
+          container: containerRef.current,
+          renderer: 'svg',
+          loop: true,
+          autoplay: true,
+          animationData: animationData
+        });
+      })
+      .catch(error => {
+        console.error('Error loading animation:', error);
+      });
 
-    window.addEventListener('scroll', handleScroll);
     return () => {
-      window.removeEventListener('scroll', handleScroll);
       if (animationRef.current) {
         animationRef.current.destroy();
       }
     };
-  }, [scrollSpeed]);
-
-  useEffect(() => {
-    if (animationRef.current) {
-      if (isInView) {
-        animationRef.current.play();
-      } else {
-        animationRef.current.pause();
-      }
-    }
-  }, [isInView]);
+  }, []);
 
   return (
     <div 
       ref={containerRef} 
-      className="w-full h-80 flex items-center justify-center overflow-hidden"
-      style={{
-        background: 'linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(100,108,255,0.15) 100%)',
-        borderRadius: '16px',
-        boxShadow: '0 0 30px rgba(100, 108, 255, 0.1) inset',
-      }}
+      style={{ 
+        width: '100%', 
+        height: '100%',
+        background: 'transparent'
+      }} 
     />
   );
 };

@@ -1,23 +1,36 @@
 import { motion } from 'framer-motion';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { ArrowRightIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
-import ScrollVideo from './components/ScrollVideo';
-// import AnimatedPreview from './components/AnimatedPreview'; // Commented out for debugging
-// import LottieRunningMan from './components/LottieRunningMan'; // Commented out for debugging
 
 function App() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    setIsSubmitted(true);
+    try {
+      const response = await fetch('http://localhost:5000/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      });
+  
+      if (response.ok) {
+        setIsSubmitted(true);
+      } else {
+        console.error('Failed to send email');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   return (
     <div className="min-h-screen bg-primary flex flex-col relative overflow-hidden">
       {/* Background gradient overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-purple-500/15 via-accent/10 to-neon-cyan/15 animate-gradient-x pointer-events-none"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-black-500/15 via-accent/10 to-black/15 animate-gradient-x pointer-events-none"></div>
       {/* Navigation */}
       <nav className="py-6 sm:py-8 px-4 sm:px-6">
         <div className="section-container flex justify-between items-center relative z-10">
@@ -45,15 +58,15 @@ function App() {
 
       {/* Hero Section */}
       <main className="flex-grow">
-        <div className="section-container py-16 sm:py-20">
-          <div className="max-w-4xl mx-auto text-center">
+        <div className="section-container py-16 sm:py-20 flex">
+          <div className="max-w-4xl text-left">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
             >
-              <h2 className="text-7xl sm:text-8xl lg:text-9xl font-orbitron font-bold mb-6 sm:mb-8">
-                Compete for the Title of #1
+              <h2 className="text-7xl sm:text-8xl lg:text-7xl font-orbitron font-bold mb-6 sm:mb-8">
+                Fitness Bestie
               </h2>
               <p className="text-2xl sm:text-3xl text-gray-300 mb-8 sm:mb-10 font-luckiest tracking-wider">
                 Fitness meets competition. This is your shot at <span className="text-accent">local dominance</span>.
@@ -65,53 +78,73 @@ function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="max-w-md mx-auto glassmorphism-card mt-8"
+              className="w-full text-left pl-4 sm:pl-6"
             >
               {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="mb-4">
-                    <p className="text-gray-300 mb-4">Join Our Waitlist - Get early access and exclusive updates when we launch.</p>
+                <form onSubmit={handleSubmit} className="max-w-xl">
+                  <h3 className="text-2xl font-bold mb-2">Join Our Waitlist</h3>
+                  <p className="text-gray-300 mb-4">Get early access and exclusive updates when we launch.</p>
+                  <div className="flex gap-3 items-center">
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="Enter Email"
-                      className="input-field w-full mb-4 bg-secondary/50 backdrop-blur-sm"
+                      placeholder="Enter your email"
+                      className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20"
                       required
                     />
                     <motion.button
                       type="submit"
-                      className="btn-primary w-full shadow-glow font-bungee tracking-wide"
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                      className="px-6 py-2 @apply bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium"
+                      whileHover={{ scale: 1.02 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      Join the Waitlist
+                      Join Now
                     </motion.button>
                   </div>
+                  <p className="text-sm text-gray-400 mt-4">1,248 already joined</p>
                 </form>
               ) : (
                 <motion.div
                   initial={{ opacity: 0, scale: 0.8 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  className="flex items-center justify-center space-x-3 text-green-500 py-4"
+                  className="flex items-center space-x-3 text-green-500"
                 >
-                  <CheckCircleIcon className="w-8 h-8" />
-                  <span className="text-lg font-bungee">You're on the waitlist!</span>
+                  <CheckCircleIcon className="w-6 h-6" />
+                  <span className="text-lg">You're on the waitlist!</span>
                 </motion.div>
               )}
-              
-              {/* Social Proof */}
-              <motion.div
+            </motion.div>
+          </div>
+          
+
+
+
+          {/* Image Container */}
+          <div className="flex-1 grid grid-cols-3 gap-1">
+            {/* Top row images */}
+            <img src="public/images/WhatsApp Image 2025-04-28 at 16.51.03_3faa0dd5.jpg" alt="Description 1" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="public/images/WhatsApp Image 2025-04-28 at 16.51.03_015f0660.jpg" alt="Description 2" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            {/* Bottom row images */}
+            <img src="public/images/WhatsApp Image 2025-04-28 at 16.51.03_49bf56e0.jpg" alt="Description 3" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="public/images/WhatsApp Image 2025-04-28 at 16.51.03_052da89c.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="public/images/WhatsApp Image 2025-04-28 at 17.47.02_e7f80a02.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            
+            
+
+          </div>
+       {/* Social Proof */}
+       <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
                 className="mt-4 text-gray-400"
               >
-                <p className="text-sm font-medium">1,248 already joined</p>
+                <p className="text-sm font-medium"></p>
               </motion.div>
-            </motion.div>
+            
           </div>
-        </div>
+        
 
         {/* Animated Preview Section */}
         <div className="bg-secondary py-16 relative overflow-hidden">
@@ -121,19 +154,207 @@ function App() {
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
-              className="max-w-4xl mx-auto text-center"
+              className="max-w-4xl mx-auto"
             >
-              <h3 className="text-3xl sm:text-4xl font-orbitron font-bold mb-6 sm:mb-8">Interactive Preview</h3>
-              {/* <AnimatedPreview /> */}{/* Commented out for debugging */}
+              <h3 className="text-3xl sm:text-4xl font-orbitron font-bold mb-6 sm:mb-8 text-center">Progress Tracking & Leaderboard</h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                {/* Progress Chart */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    boxShadow: "0 0 25px rgba(168, 85, 247, 0.4)",
+                    transition: { duration: 0.2 }
+                  }}
+                  viewport={{ once: true }}
+                  className="bg-primary/30 p-6 rounded-xl backdrop-blur-sm border border-purple-500/20 transition-all duration-300"
+                >
+                  <h4 className="text-xl font-bold mb-4">Your Weekly Progress</h4>
+                  <div className="space-y-4">
+                    {/* Workout Progress */}
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span>Workouts</span>
+                        <motion.span
+                          whileHover={{ scale: 1.1 }}
+                          className="font-bold"
+                        >
+                          85%
+                        </motion.span>
+                      </div>
+                      <div className="h-4 bg-black/20 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '85%' }}
+                          whileHover={{ filter: "brightness(1.2)" }}
+                          transition={{ duration: 1, delay: 0.2 }}
+                          className="h-full bg-purple-500 relative"
+                        >
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-purple-500/0 via-white/20 to-purple-500/0"
+                            animate={{
+                              x: ['-100%', '100%'],
+                            }}
+                            transition={{
+                              repeat: Infinity,
+                              duration: 2,
+                            }}
+                          />
+                        </motion.div>
+                      </div>
+                    </div>
+                    {/* Strength Goals */}
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span>Strength Goals</span>
+                        <motion.span
+                          whileHover={{ scale: 1.1 }}
+                          className="font-bold"
+                        >
+                          70%
+                        </motion.span>
+                      </div>
+                      <div className="h-4 bg-black/20 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '70%' }}
+                          whileHover={{ filter: "brightness(1.2)" }}
+                          transition={{ duration: 1, delay: 0.4 }}
+                          className="h-full bg-blue-500 relative"
+                        >
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-white/20 to-blue-500/0"
+                            animate={{
+                              x: ['-100%', '100%'],
+                            }}
+                            transition={{
+                              repeat: Infinity,
+                              duration: 2,
+                            }}
+                          />
+                        </motion.div>
+                      </div>
+                    </div>
+                    {/* Consistency */}
+                    <div>
+                      <div className="flex justify-between mb-2">
+                        <span>Consistency</span>
+                        <motion.span
+                          whileHover={{ scale: 1.1 }}
+                          className="font-bold"
+                        >
+                          90%
+                        </motion.span>
+                      </div>
+                      <div className="h-4 bg-black/20 rounded-full overflow-hidden">
+                        <motion.div
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '90%' }}
+                          whileHover={{ filter: "brightness(1.2)" }}
+                          transition={{ duration: 1, delay: 0.6 }}
+                          className="h-full bg-cyan-500 relative"
+                        >
+                          <motion.div
+                            className="absolute inset-0 bg-gradient-to-r from-cyan-500/0 via-white/20 to-cyan-500/0"
+                            animate={{
+                              x: ['-100%', '100%'],
+                            }}
+                            transition={{
+                              repeat: Infinity,
+                              duration: 2,
+                            }}
+                          />
+                        </motion.div>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Leaderboard */}
+                <motion.div
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  whileHover={{ 
+                    scale: 1.02,
+                    boxShadow: "0 0 25px rgba(59, 130, 246, 0.4)",
+                    transition: { duration: 0.2 }
+                  }}
+                  viewport={{ once: true }}
+                  className="bg-primary/30 p-6 rounded-xl backdrop-blur-sm border border-blue-500/20 transition-all duration-300"
+                >
+                  <h4 className="text-xl font-bold mb-4">Local Leaderboard</h4>
+                  <div className="space-y-4">
+                    {/* Top performers */}
+                    <motion.div 
+                      className="flex items-center justify-between p-3 bg-black/20 rounded-lg hover:bg-black/30 transition-colors duration-300"
+                      whileHover={{ x: 10 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <motion.span 
+                          className="text-xl font-bold text-yellow-500"
+                          whileHover={{ scale: 1.2, rotate: 360 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          1
+                        </motion.span>
+                        <span>Alex M.</span>
+                      </div>
+                      <motion.span
+                        whileHover={{ scale: 1.1 }}
+                        className="font-bold"
+                      >
+                        2,450 pts
+                      </motion.span>
+                    </motion.div>
+                    <motion.div 
+                      className="flex items-center justify-between p-3 bg-black/20 rounded-lg hover:bg-black/30 transition-colors duration-300"
+                      whileHover={{ x: 10 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <motion.span 
+                          className="text-xl font-bold text-gray-300"
+                          whileHover={{ scale: 1.2, rotate: 360 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          2
+                        </motion.span>
+                        <span>Sarah K.</span>
+                      </div>
+                      <motion.span
+                        whileHover={{ scale: 1.1 }}
+                        className="font-bold"
+                      >
+                        2,280 pts
+                      </motion.span>
+                    </motion.div>
+                    <motion.div 
+                      className="flex items-center justify-between p-3 bg-black/20 rounded-lg hover:bg-black/30 transition-colors duration-300"
+                      whileHover={{ x: 10 }}
+                    >
+                      <div className="flex items-center gap-3">
+                        <motion.span 
+                          className="text-xl font-bold text-amber-600"
+                          whileHover={{ scale: 1.2, rotate: 360 }}
+                          transition={{ duration: 0.5 }}
+                        >
+                          3
+                        </motion.span>
+                        <span>Mike R.</span>
+                      </div>
+                      <motion.span
+                        whileHover={{ scale: 1.1 }}
+                        className="font-bold"
+                      >
+                        2,150 pts
+                      </motion.span>
+                    </motion.div>
+                  </div>
+                </motion.div>
+              </div>
             </motion.div>
           </div>
-        </div>
-
-        {/* Scroll Video Section */}
-        <div className="relative overflow-hidden">
-          <ScrollVideo />
-          {/* Add extra space for scrolling */}
-          <div style={{ height: '200vh' }} />
         </div>
 
         {/* What is Fitcom Section */}
@@ -353,7 +574,7 @@ function App() {
         </div>
 
         {/* Footer */}
-        <footer className="py-8 bg-primary border-t border-accent">
+        <footer className="py-8 bg-primary border-t border-grey-500">
           <div className="section-container text-center">
             <p className="text-gray-400">© 2023 FitCom. All rights reserved.</p>
           </div>
@@ -364,3 +585,4 @@ function App() {
 }
 
 export default App;
+
