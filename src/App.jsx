@@ -66,7 +66,7 @@ function App() {
               transition={{ delay: 0.2, duration: 0.7 }}
             >
               <h2 className="text-7xl sm:text-8xl lg:text-7xl font-orbitron font-bold mb-6 sm:mb-8">
-                Fitness Bestie
+                Fitness Wingman
               </h2>
               <p className="text-2xl sm:text-3xl text-gray-300 mb-8 sm:mb-10 font-luckiest tracking-wider">
                 Fitness meets competition. This is your shot at <span className="text-accent">local dominance</span>.
