@@ -58,17 +58,17 @@ function App() {
 
       {/* Hero Section */}
       <main className="flex-grow">
-        <div className="section-container py-16 sm:py-20 flex">
-          <div className="max-w-4xl text-left">
+        <div className="section-container py-10 sm:py-16 flex flex-col lg:flex-row items-center">
+          <div className="w-full lg:max-w-4xl text-left mb-8 lg:mb-0">
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.7 }}
             >
-              <h2 className="text-7xl sm:text-8xl lg:text-7xl font-orbitron font-bold mb-6 sm:mb-8">
+              <h2 className="text-4xl xs:text-5xl sm:text-7xl lg:text-7xl font-orbitron font-bold mb-4 sm:mb-8 leading-tight">
                 Fitness Wingman
               </h2>
-              <p className="text-2xl sm:text-3xl text-gray-300 mb-8 sm:mb-10 font-luckiest tracking-wider">
+              <p className="text-lg xs:text-xl sm:text-2xl lg:text-3xl text-gray-300 mb-6 sm:mb-10 font-luckiest tracking-wider">
                 Fitness meets competition. This is your shot at <span className="text-emerald-600">local dominance</span>.
               </p>
             </motion.div>
@@ -78,19 +78,19 @@ function App() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.7 }}
-              className="w-full text-left pl-4 sm:pl-6"
+              className="w-full text-left pl-0 sm:pl-6"
             >
               {!isSubmitted ? (
-                <form onSubmit={handleSubmit} className="max-w-xl">
-                  <h3 className="text-2xl font-bold mb-2">Join Our Waitlist</h3>
-                  <p className="text-gray-300 mb-4">Get early access and exclusive updates when we launch.</p>
-                  <div className="flex gap-3 items-center">
+                <form onSubmit={handleSubmit} className="max-w-xl w-full">
+                  <h3 className="text-xl sm:text-2xl font-bold mb-2">Join Our Waitlist</h3>
+                  <p className="text-gray-300 mb-4 text-base sm:text-lg">Get early access and exclusive updates when we launch.</p>
+                  <div className="flex flex-col sm:flex-row gap-3 items-stretch">
                     <input
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="Enter your email"
-                      className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20"
+                      className="flex-1 px-4 py-2 rounded-lg bg-white/10 text-white border border-white/20 mb-2 sm:mb-0"
                       required
                     />
                     <motion.button
