@@ -14,7 +14,7 @@ body {
   font-family: 'Poppins', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background-color: #000000;
+  background-color: #1E1E1E;
   color: #ffffff;
 }
 
@@ -36,11 +36,11 @@ body {
   
 
   .shadow-glow {
-    box-shadow: 0 0 15px rgba(100, 108, 255, 0.6);
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.6);
   }
   
   .btn-primary {
-    @apply bg-gray-500 hover:bg-gray-600 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-glow;
+    @apply bg-emerald-700 hover:bg-emerald-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 transform hover:scale-105 shadow-glow;
   }
   
   .input-field {
@@ -55,5 +55,5 @@ body {
 
 .glassmorphism-card:hover {
   transform: perspective(1000px) rotateX(-5deg) rotateY(5deg);
-  box-shadow: 0 0 20px rgba(100, 108, 255, 0.5);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
 }

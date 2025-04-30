@@ -7,7 +7,7 @@ export default {
   theme: {
     extend: {
       colors: {
-        'primary': '#000000', // Black background
+        'primary': '#1E1E1E', // Black background
         'secondary': '#1a1a1a', // Dark gray for secondary elements
         'accent': '#646cff',
         'accent-light': '#818cf8',
@@ -45,7 +45,7 @@ export default {
         },
       },
       boxShadow: {
-        'neon': '0 0 20px rgba(100, 108, 255, 0.5)',
+        'neon': '0 0 20px rgba(255, 255, 255, 0.5)',
         'neon-strong': '0 0 30px rgba(100, 108, 255, 0.7)',
       },
     },

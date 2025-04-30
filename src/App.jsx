@@ -28,7 +28,7 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen bg-primary flex flex-col relative overflow-hidden">
+    <div className="min-h-screen bg-black flex flex-col relative overflow-hidden">
       {/* Background gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-black-500/15 via-accent/10 to-black/15 animate-gradient-x pointer-events-none"></div>
       {/* Navigation */}
@@ -69,7 +69,7 @@ function App() {
                 Fitness Wingman
               </h2>
               <p className="text-2xl sm:text-3xl text-gray-300 mb-8 sm:mb-10 font-luckiest tracking-wider">
-                Fitness meets competition. This is your shot at <span className="text-accent">local dominance</span>.
+                Fitness meets competition. This is your shot at <span className="text-emerald-600">local dominance</span>.
               </p>
             </motion.div>
 
@@ -95,7 +95,7 @@ function App() {
                     />
                     <motion.button
                       type="submit"
-                      className="px-6 py-2 @apply bg-gray-500 hover:bg-gray-600 text-white rounded-lg font-medium"
+                      className="px-6 py-2 bg-emerald-600 hover:bg-emerald-700 text-white rounded-lg font-medium"
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
                     >
@@ -148,7 +148,7 @@ function App() {
 
         {/* Animated Preview Section */}
         <div className="bg-secondary py-16 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-blue-500/10 to-cyan-500/10 animate-gradient-x"></div>
+          <div className="absolute inset-0 animate-gradient-x"></div>
           <div className="section-container relative z-10">
             <motion.div 
               initial={{ opacity: 0 }}
@@ -165,11 +165,11 @@ function App() {
                   whileInView={{ opacity: 1, x: 0 }}
                   whileHover={{ 
                     scale: 1.02,
-                    boxShadow: "0 0 25px rgba(168, 85, 247, 0.4)",
+                    boxShadow: "0 0 25px rgba(255, 255, 255, 0.4)",
                     transition: { duration: 0.2 }
                   }}
                   viewport={{ once: true }}
-                  className="bg-primary/30 p-6 rounded-xl backdrop-blur-sm border border-purple-500/20 transition-all duration-300"
+                  className="bg-secondary/40 p-6 rounded-xl backdrop-blur-sm border border-purple-500/20 transition-all duration-300"
                 >
                   <h4 className="text-xl font-bold mb-4">Your Weekly Progress</h4>
                   <div className="space-y-4">
@@ -278,11 +278,11 @@ function App() {
                   whileInView={{ opacity: 1, x: 0 }}
                   whileHover={{ 
                     scale: 1.02,
-                    boxShadow: "0 0 25px rgba(59, 130, 246, 0.4)",
+                    boxShadow: "0 0 25px rgba(255, 255, 255, 0.4)",
                     transition: { duration: 0.2 }
                   }}
                   viewport={{ once: true }}
-                  className="bg-primary/30 p-6 rounded-xl backdrop-blur-sm border border-blue-500/20 transition-all duration-300"
+                  className="bg-secondary/40 p-6 rounded-xl backdrop-blur-sm border border-blue-500/20 transition-all duration-300"
                 >
                   <h4 className="text-xl font-bold mb-4">Local Leaderboard</h4>
                   <div className="space-y-4">
