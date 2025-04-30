@@ -1,12 +1,18 @@
-# React + Vite
+FitCom
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+FitCom is a modern web application that brings together fitness enthusiasts to compete, track progress, and connect with a local community. Built with React, Vite, TailwindCSS, and a Node.js/Express backend, FitCom offers a seamless and interactive experience for users looking to challenge themselves and others.
 
-Currently, two official plugins are available:
+Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+-Competitive Fitness Platform:Join a community where fitness and friendly competition go hand-in-hand.
 
-## Expanding the ESLint configuration
+-Progress Tracking:Visualize your weekly workouts and achievements.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+-Leaderboard:See how you stack up against others in your area.
+
+-Waitlist Signup: Get early access and exclusive updates by joining the waitlist.
+
+-Modern UI: Built with React, Framer Motion, and TailwindCSS for a sleek, animated interface.
+
+-Email Notifications: Automated emails for waitlist signups using Nodemailer.
+
