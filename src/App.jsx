@@ -123,12 +123,12 @@ function App() {
           {/* Image Container */}
           <div className="flex-1 grid grid-cols-3 gap-1">
             {/* Top row images */}
-            <img src="public/images/WhatsApp Image 2025-04-28 at 16.51.03_3faa0dd5.jpg" alt="Description 1" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
-            <img src="public/images/WhatsApp Image 2025-04-28 at 16.51.03_015f0660.jpg" alt="Description 2" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="images\WhatsApp Image 2025-04-30 at 17.52.47_0e1f55f6.jpg" alt="Description 1" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="images\WhatsApp Image 2025-04-30 at 17.52.47_595c5f03.jpg" alt="Description 2" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
             {/* Bottom row images */}
-            <img src="public/images/WhatsApp Image 2025-04-28 at 16.51.03_49bf56e0.jpg" alt="Description 3" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
-            <img src="public/images/WhatsApp Image 2025-04-28 at 16.51.03_052da89c.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
-            <img src="public/images/WhatsApp Image 2025-04-28 at 17.47.02_e7f80a02.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="images\WhatsApp Image 2025-04-30 at 17.52.48_0e529f4b.jpg" alt="Description 3" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="images\WhatsApp Image 2025-04-30 at 17.52.48_8820d85a.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="images\WhatsApp Image 2025-04-30 at 17.52.49_c349afae.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
             
             
 
