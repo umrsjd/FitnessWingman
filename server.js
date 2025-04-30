@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: "https://fitness-wingman.vercel.app/"
+  origin: ["https://fitness-wingman.vercel.app", "http://localhost:5173"]
 }));
 app.use(bodyParser.json());
 
