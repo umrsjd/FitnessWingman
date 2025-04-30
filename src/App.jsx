@@ -9,7 +9,7 @@ function App() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch('http://localhost:5000/api/waitlist', {
+      const response = await fetch('https://fitnesswingman.onrender.com', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
