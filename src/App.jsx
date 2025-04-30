@@ -123,12 +123,13 @@ function App() {
           {/* Image Container */}
           <div className="flex-1 grid grid-cols-3 gap-1">
             {/* Top row images */}
-            <img src="images\WhatsApp Image 2025-04-30 at 17.52.47_0e1f55f6.jpg" alt="Description 1" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
-            <img src="images\WhatsApp Image 2025-04-30 at 17.52.47_595c5f03.jpg" alt="Description 2" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="https://i.pinimg.com/736x/2f/c7/4b/2fc74b41277d39d228ef3dc81a88316d.jpg" alt="Description 1" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="https://i.pinimg.com/736x/4a/a3/a3/4aa3a3505e8aa54c8542c2e9ed0eac41.jpg" alt="Description 2" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
             {/* Bottom row images */}
-            <img src="images\WhatsApp Image 2025-04-30 at 17.52.48_0e529f4b.jpg" alt="Description 3" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
-            <img src="images\WhatsApp Image 2025-04-30 at 17.52.48_8820d85a.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
-            <img src="images\WhatsApp Image 2025-04-30 at 17.52.49_c349afae.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="https://i.pinimg.com/736x/9f/1b/35/9f1b3582acc6d525c821915138c46c68.jpg" alt="Description 3" className="w-full h-auto rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="https://i.pinimg.com/736x/cd/26/61/cd2661b6167ea4b4242f319aa19c6d86.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="https://i.pinimg.com/736x/7f/46/2b/7f462ba0dcca38d4b2141c6a4d1aaba2.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
+            <img src="https://i.pinimg.com/736x/3c/1b/c3/3c1bc35c8f0eae5b4fe2992e062980d7.jpg" alt="Description 4" className="w-full h-full rounded-lg" style={{ width: '200px', height: '180px', objectFit: 'cover' }} />
             
             
 
