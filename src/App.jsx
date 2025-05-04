@@ -1,10 +1,12 @@
 import { motion } from 'framer-motion';
 import { useState } from 'react';
 import { ArrowRightIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
+import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
 function App() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -42,8 +44,8 @@ function App() {
         <div className="absolute inset-0 bg-gradient-to-br from-black/80 via-black/70 to-black/90"></div>
         <div className="relative z-10">
           {/* Navigation */}
-          <nav className="py-4 sm:py-8 px-4 sm:px-6">
-            <div className="section-container flex flex-col sm:flex-row justify-between items-center gap-4 sm:gap-6">
+          <nav className="py-4 sm:py-11 px-4 sm:px-6">
+            <div className="section-container flex justify-between items-center">
               <motion.h1 
                 initial={{ opacity: 0, x: -20 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -52,10 +54,26 @@ function App() {
               >
                 FitCom
               </motion.h1>
-              <div className="flex items-center gap-4 sm:gap-6">
+              
+              {/* Mobile Menu Button */}
+              <motion.button
+                className="block sm:hidden p-2 text-white"
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+                whileHover={{ scale: 1.1 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                {isMenuOpen ? (
+                  <XMarkIcon className="h-6 w-6" />
+                ) : (
+                  <Bars3Icon className="h-6 w-6" />
+                )}
+              </motion.button>
+
+              {/* Desktop Menu */}
+              <div className="hidden sm:flex items-center gap-6">
                 <motion.a
                   href="/"
-                  className="text-base sm:text-lg font-medium text-gray-200 hover:text-gray-200 transition-colors duration-300"
+                  className="text-base sm:text-lg font-medium text-gray-200 hover:text-white transition-colors duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -63,7 +81,7 @@ function App() {
                 </motion.a>
                 <motion.a
                   href="/about"
-                  className="text-base sm:text-lg font-medium text-gray-200 hover:text-gray-200 transition-colors duration-300"
+                  className="text-base sm:text-lg font-medium text-gray-200 hover:text-white transition-colors duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -71,7 +89,7 @@ function App() {
                 </motion.a>
                 <motion.a
                   href="mailto:contact@fitcom.com"
-                  className="text-base sm:text-lg font-medium text-gray-200 hover:text-gray-200 transition-colors duration-300"
+                  className="text-base sm:text-lg font-medium text-gray-200 hover:text-white transition-colors duration-300"
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                 >
@@ -79,9 +97,47 @@ function App() {
                 </motion.a>
               </div>
             </div>
+
+            {/* Mobile Menu */}
+            <motion.div
+              initial={false}
+              animate={{
+                height: isMenuOpen ? 'auto' : 0,
+                opacity: isMenuOpen ? 1 : 0
+              }}
+              className="sm:hidden overflow-hidden backdrop-blur-sm bg-black/60"
+            >
+              <div className="flex flex-col items-center py-4 space-y-4">
+                <motion.a
+                  href="/"
+                  className="text-lg font-medium text-gray-200 hover:text-white transition-colors duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Home
+                </motion.a>
+                <motion.a
+                  href="/about"
+                  className="text-lg font-medium text-gray-200 hover:text-white transition-colors duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  About Us
+                </motion.a>
+                <motion.a
+                  href="mailto:contact@fitcom.com"
+                  className="text-lg font-medium text-gray-200 hover:text-white transition-colors duration-300"
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  Contact Us
+                </motion.a>
+              </div>
+            </motion.div>
           </nav>
-          {/* Hero Section */}
-          <main className="section-container min-h-screen flex items-center py-16 sm:py-32">
+
+          {/* Hero Section - Adjusted for mobile */}
+          <main className="section-container min-h-[80vh] flex items-start sm:items-center py-12 sm:py-32">
             <div className="flex justify-start sm:justify-end w-full px-4 sm:px-0">
               <div className="max-w-4xl w-full">
                 <motion.div
