@@ -107,7 +107,7 @@ function App() {
               }}
               className="sm:hidden overflow-hidden backdrop-blur-sm bg-black/10"
             >
-              <div className="flex flex-col items-center py-5 space-y-5">
+              <div className="flex flex-col items-center py-6 space-y-6">
                 <motion.a
                   href="/"
                   className="text-lg font-medium text-gray-200 hover:text-white transition-colors duration-300"
