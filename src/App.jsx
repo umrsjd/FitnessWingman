@@ -105,9 +105,9 @@ function App() {
                 height: isMenuOpen ? 'auto' : 0,
                 opacity: isMenuOpen ? 1 : 0
               }}
-              className="sm:hidden overflow-hidden backdrop-blur-sm bg-black/60"
+              className="sm:hidden overflow-hidden backdrop-blur-sm bg-black/10"
             >
-              <div className="flex flex-col items-center py-4 space-y-4">
+              <div className="flex flex-col items-center py-5 space-y-5">
                 <motion.a
                   href="/"
                   className="text-lg font-medium text-gray-200 hover:text-white transition-colors duration-300"
