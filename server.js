@@ -11,7 +11,9 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 app.use(cors({
-  origin: ["https://fitness-wingman.vercel.app", "http://localhost:5173"]
+  origin: ["https://fitness-wingman.vercel.app", "http://localhost:5173", "http://localhost:5000"],
+  methods: ['GET', 'POST'],
+  credentials: true
 }));
 app.use(bodyParser.json());
 

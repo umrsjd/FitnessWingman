@@ -10,16 +10,19 @@ function App() {
   const [waitlistCount, setWaitlistCount] = useState(0);
 
   useEffect(() => {
-    // Fetch initial count with retry logic
     const fetchCount = async () => {
       try {
-        const res = await fetch('https://fitnesswingman.onrender.com/api/waitlist/count');
+        const res = await fetch('https://fitnesswingman.onrender.com/api/waitlist/count', {
+          credentials: 'include',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
         if (!res.ok) throw new Error('Server response was not ok');
         const data = await res.json();
         setWaitlistCount(data.count);
       } catch (error) {
         console.error('Error fetching count:', error);
-        // Retry after 3 seconds if server might be starting up
         setTimeout(fetchCount, 3000);
       }
     };
@@ -31,6 +34,7 @@ function App() {
     try {
       const response = await fetch('https://fitnesswingman.onrender.com/api/waitlist', {
         method: 'POST',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
