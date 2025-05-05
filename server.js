@@ -59,17 +59,42 @@ app.post('/api/waitlist', async (req, res) => {
       const count = parseInt(countResult.rows[0].count);
       
       const reminderMailOptions = {
-        from: `"Fitness Bestie" <${process.env.EMAIL_USER}>`,
+        from: {
+          name: 'Fitness Bestie',
+          address: process.env.EMAIL_USER
+        },
         to: email,
-        subject: 'You\'re Already Part of Fitness Bestie!',
+        replyTo: process.env.EMAIL_USER,
+        subject: "You're Already Part of Fitness Bestie!",
         html: `
-          <h2>Welcome Back to Fitness Bestie!</h2>
-          <p>We noticed you tried to join our waitlist again. Don't worry - you're already on our list!</p>
-          <p>We're excited to have you as part of our community and will keep you updated with all the latest news.</p>
-          <br>
-          <p>Best regards,<br>Fitness Bestie Team</p>
+          <div style="font-family: Arial, sans-serif; color: #222;">
+            <h2>Welcome Back to Fitness Bestie!</h2>
+            <p>We noticed you tried to join our waitlist again. Don't worry - you're already on our list!</p>
+            <p>We're excited to have you as part of our community and will keep you updated with all the latest news.</p>
+            <br>
+            <p>Best regards,<br>Fitness Bestie Team</p>
+          </div>
         `,
-        text: 'Welcome Back to Fitness Bestie! We noticed you tried to join our waitlist again. Don\'t worry - you\'re already on our list!'
+        text: "Welcome Back to Fitness Bestie!\n\nWe noticed you tried to join our waitlist again. Don't worry - you're already on our list!\n\nWe're excited to have you as part of our community and will keep you updated with all the latest news.\n\nBest regards,\nFitness Bestie Team"
+      };
+
+      const newRegistrationMailOptions = {
+        from: {
+          name: 'Fitness Bestie',
+          address: process.env.EMAIL_USER
+        },
+        to: email,
+        replyTo: process.env.EMAIL_USER,
+        subject: "Welcome to Fitness Bestie!",
+        html: `
+          <div style="font-family: Arial, sans-serif; color: #222;">
+            <h2>Welcome to Fitness Bestie!</h2>
+            <p>Thank you for enrolling in Fitness Bestie! We're excited to have you on board and will notify you shortly with more updates.</p>
+            <br>
+            <p>Best regards,<br>Fitness Bestie Team</p>
+          </div>
+        `,
+        text: "Welcome to Fitness Bestie!\n\nThank you for enrolling in Fitness Bestie! We're excited to have you on board and will notify you shortly with more updates.\n\nBest regards,\nFitness Bestie Team"
       };
 
       try {
