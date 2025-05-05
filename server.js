@@ -37,31 +37,29 @@ app.post('/api/waitlist', async (req, res) => {
     const existingEmail = await pool.query('SELECT email FROM waitlist WHERE email = $1', [email]);
     let isNewRegistration = existingEmail.rows.length === 0;
     
+    // Configure Nodemailer once - reuse for both cases
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      host: 'smtp.gmail.com',
+      port: 465, // Changed to 465 for SSL
+      secure: true, // Changed to true for SSL
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS,
+      },
+      debug: true // Enable debug logs
+    });
+
+    // Verify transporter configuration
+    await transporter.verify();
+    console.log('SMTP connection verified successfully');
+
     if (!isNewRegistration) {
-      // Email exists, but we'll still send a reminder email
       const countResult = await pool.query('SELECT COUNT(*) FROM waitlist');
       const count = parseInt(countResult.rows[0].count);
       
-      // Configure Nodemailer for reminder email
-      const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        host: 'smtp.gmail.com',
-        port: 587,
-        secure: false,
-        auth: {
-          user: process.env.EMAIL_USER,
-          pass: process.env.EMAIL_PASS,
-        },
-        tls: {
-          rejectUnauthorized: false
-        }
-      });
-
       const reminderMailOptions = {
-        from: {
-          name: 'Fitness Bestie',
-          address: process.env.EMAIL_USER
-        },
+        from: `"Fitness Bestie" <${process.env.EMAIL_USER}>`,
         to: email,
         subject: 'You\'re Already Part of Fitness Bestie!',
         html: `
@@ -70,48 +68,32 @@ app.post('/api/waitlist', async (req, res) => {
           <p>We're excited to have you as part of our community and will keep you updated with all the latest news.</p>
           <br>
           <p>Best regards,<br>Fitness Bestie Team</p>
-        `
+        `,
+        text: 'Welcome Back to Fitness Bestie! We noticed you tried to join our waitlist again. Don\'t worry - you\'re already on our list!'
       };
 
       try {
-        await transporter.sendMail(reminderMailOptions);
-        console.log('Reminder email sent successfully to:', email);
+        const info = await transporter.sendMail(reminderMailOptions);
+        console.log('Reminder email sent successfully. Message ID:', info.messageId);
+        return res.status(200).json({ 
+          message: 'You are already on the waitlist!',
+          count,
+          alreadyExists: true,
+          emailSent: true
+        });
       } catch (emailError) {
         console.error('Reminder email sending error:', emailError);
+        throw emailError; // Propagate email error
       }
-
-      return res.status(200).json({ 
-        message: 'You are already on the waitlist!',
-        count,
-        alreadyExists: true 
-      });
     }
 
-    // For new registration, proceed with original flow
+    // For new registration
     await pool.query('INSERT INTO waitlist (email) VALUES ($1)', [email]);
     const countResult = await pool.query('SELECT COUNT(*) FROM waitlist');
     const count = parseInt(countResult.rows[0].count);
 
-    // Configure Nodemailer for new registration
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      host: 'smtp.gmail.com',
-      port: 587,
-      secure: false,
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASS,
-      },
-      tls: {
-        rejectUnauthorized: false
-      }
-    });
-
     const newRegistrationMailOptions = {
-      from: {
-        name: 'Fitness Bestie',
-        address: process.env.EMAIL_USER
-      },
+      from: `"Fitness Bestie" <${process.env.EMAIL_USER}>`,
       to: email,
       subject: 'Welcome to Fitness Bestie!',
       html: `
@@ -119,25 +101,29 @@ app.post('/api/waitlist', async (req, res) => {
         <p>Thank you for enrolling in Fitness Bestie! We're excited to have you on board and will notify you shortly with more updates.</p>
         <br>
         <p>Best regards,<br>Fitness Bestie Team</p>
-      `
+      `,
+      text: 'Welcome to Fitness Bestie! Thank you for enrolling. We\'re excited to have you on board and will notify you shortly with more updates.'
     };
 
     try {
-      await transporter.sendMail(newRegistrationMailOptions);
-      console.log('Welcome email sent successfully to:', email);
-      res.status(200).json({ message: 'Email sent successfully', count });
+      const info = await transporter.sendMail(newRegistrationMailOptions);
+      console.log('Welcome email sent successfully. Message ID:', info.messageId);
+      res.status(200).json({ 
+        message: 'Email sent successfully', 
+        count,
+        emailSent: true 
+      });
     } catch (emailError) {
       console.error('Email sending error:', emailError);
-      res.status(200).json({ 
-        message: 'Registration successful but email delivery failed',
-        count,
-        emailError: true
-      });
+      throw emailError; // Propagate email error
     }
     
   } catch (error) {
     console.error('Server error:', error);
-    res.status(500).json({ error: 'Failed to process request' });
+    res.status(500).json({ 
+      error: 'Failed to process request',
+      details: error.message 
+    });
   }
 });
 
