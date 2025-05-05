@@ -10,11 +10,20 @@ function App() {
   const [waitlistCount, setWaitlistCount] = useState(0);
 
   useEffect(() => {
-    // Fetch initial count
-    fetch('https://fitnesswingman.onrender.com/api/waitlist/count')
-      .then(res => res.json())
-      .then(data => setWaitlistCount(data.count))
-      .catch(error => console.error('Error fetching count:', error));
+    // Fetch initial count with retry logic
+    const fetchCount = async () => {
+      try {
+        const res = await fetch('https://fitnesswingman.onrender.com/api/waitlist/count');
+        if (!res.ok) throw new Error('Server response was not ok');
+        const data = await res.json();
+        setWaitlistCount(data.count);
+      } catch (error) {
+        console.error('Error fetching count:', error);
+        // Retry after 3 seconds if server might be starting up
+        setTimeout(fetchCount, 3000);
+      }
+    };
+    fetchCount();
   }, []);
 
   const handleSubmit = async (e) => {
@@ -28,15 +37,13 @@ function App() {
         body: JSON.stringify({ email }),
       });
   
-      if (response.ok) {
-        const data = await response.json();
-        setWaitlistCount(data.count);
-        setIsSubmitted(true);
-      } else {
-        console.error('Failed to send email');
-      }
+      if (!response.ok) throw new Error('Server response was not ok');
+      const data = await response.json();
+      setWaitlistCount(data.count);
+      setIsSubmitted(true);
     } catch (error) {
       console.error('Error:', error);
+      alert('Failed to join waitlist. Please try again later.');
     }
   };
 
