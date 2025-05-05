@@ -1,5 +1,5 @@
 import { motion } from 'framer-motion';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { ArrowRightIcon, CheckCircleIcon } from '@heroicons/react/24/solid';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 
@@ -7,6 +7,15 @@ function App() {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [waitlistCount, setWaitlistCount] = useState(0);
+
+  useEffect(() => {
+    // Fetch initial count
+    fetch('https://fitnesswingman.onrender.com/api/waitlist/count')
+      .then(res => res.json())
+      .then(data => setWaitlistCount(data.count))
+      .catch(error => console.error('Error fetching count:', error));
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -20,6 +29,8 @@ function App() {
       });
   
       if (response.ok) {
+        const data = await response.json();
+        setWaitlistCount(data.count);
         setIsSubmitted(true);
       } else {
         console.error('Failed to send email');
@@ -182,7 +193,8 @@ function App() {
                           Join Now
                         </motion.button>
                       </div>
-                      <p className="text-sm sm:text-base text-gray-300 mt-3 sm:mt-4">1,248 already joined</p>
+                      {/* Waitlist count display */}
+                      <p className="text-sm sm:text-base text-gray-300 mt-3 sm:mt-4">{waitlistCount} already joined</p>
                     </form>
                   ) : (
                     <motion.div
